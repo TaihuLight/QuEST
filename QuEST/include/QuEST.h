@@ -45,6 +45,7 @@ typedef struct ComplexArray
 } ComplexArray;
 
 /// \endcond
+// ^ stops hiding symbols from doxygen
 
     
 
@@ -67,6 +68,16 @@ typedef struct ComplexMatrix2
     Complex r0c0, r0c1;
     Complex r1c0, r1c1;
 } ComplexMatrix2;
+
+/** Represents a 4x4 matrix of complex numbers
+ */
+ typedef struct ComplexMatrix4
+ {
+     Complex r0c0, r0c1, r0c2, r0c3;
+     Complex r1c0, r1c1, r1c2, r1c3;
+     Complex r2c0, r2c1, r2c2, r2c3;
+     Complex r3c0, r3c1, r3c2, r3c3;
+ } ComplexMatrix4;
 
 /** Represents a 3-vector of real numbers
  */
@@ -1671,7 +1682,10 @@ void swapGate(Qureg qureg, int qubit1, int qubit2);
 void sqrtSwapGate(Qureg qureg, int qb1, int qb2);
 
 /** Apply a general multiple-control, conditioned on a specific bit sequence,
- *  single-target unitary, which can include a global phase factor. 
+ *  single-target unitary, which can include a global phase factor. This can be
+ * used, by supplying a different unitary for each bit sequence, to effect 
+ * uniformly-controlled gates, or multiplexors.
+ * 
  * Any number of control qubits can be specified, along with which of their 
  * states (0 or 1) to condition upon; when the specified controls are in the 
  * specified state, the given unitary is applied to the target qubit.
@@ -1784,6 +1798,8 @@ void multiRotateZ(Qureg qureg, int* qubits, int numQubits, qreal angle);
  *      or if any qubit in \p qubits is repeated.
  */
 void multiRotatePauli(Qureg qureg, int* targetQubits, int* targetPaulis, int numTargets, qreal angle);
+
+void mytest();
 
 #ifdef __cplusplus
 }
